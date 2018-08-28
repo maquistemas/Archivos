@@ -1,0 +1,17 @@
+login.css
+
+body{
+    
+    background-color:  #ECF3FD;
+    font-size: 14px;
+    font-family: Verdana, "Verdana CE", Arial, "Arial CE";
+    color: #000000;
+    margin: 10px;
+}
+
+.login{
+    width: 325px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}

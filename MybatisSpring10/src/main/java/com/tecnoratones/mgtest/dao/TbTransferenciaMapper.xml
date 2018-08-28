@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tecnoratones.mgtest.dao.TbTransferenciaMapper" >
+
+  <resultMap id="BaseResultMap" type="com.tecnoratones.mgtest.model.TbTransferencia" >
+    <id column="TRANSFERENCIA_ID" property="TRANSFERENCIA_ID" jdbcType="DECIMAL" />
+    <result column="TRANSFERENCIA_USUARIO_ID" property="TRANSFERENCIA_USUARIO_ID" jdbcType="DECIMAL" />
+    <result column="TRANSFERENCIA_CUENTA_ORIGEN" property="TRANSFERENCIA_CUENTA_ORIGEN" jdbcType="DECIMAL" />
+    <result column="TRANSFERENCIA_CUENTA_DESTINO" property="TRANSFERENCIA_CUENTA_DESTINO" jdbcType="DECIMAL" />
+    <result column="TRANSFERENCIA_MONTO" property="TRANSFERENCIA_MONTO" jdbcType="DECIMAL" />
+    <result column="TRANSFERENCIA_TIPO" property="TRANSFERENCIA_TIPO" jdbcType="CHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    TRANSFERENCIA_ID, TRANSFERENCIA_USUARIO_ID, TRANSFERENCIA_CUENTA_ORIGEN, TRANSFERENCIA_CUENTA_DESTINO, 
+    TRANSFERENCIA_MONTO, TRANSFERENCIA_TIPO
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TB_TRANSFERENCIA
+    where TRANSFERENCIA_ID = #{TRANSFERENCIA_ID,jdbcType=DECIMAL}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_TRANSFERENCIA
+    where TRANSFERENCIA_ID = #{TRANSFERENCIA_ID,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.tecnoratones.mgtest.model.TbTransferencia" >
+    insert into TB_TRANSFERENCIA (TRANSFERENCIA_ID, TRANSFERENCIA_USUARIO_ID, 
+      TRANSFERENCIA_CUENTA_ORIGEN, TRANSFERENCIA_CUENTA_DESTINO, 
+      TRANSFERENCIA_MONTO, TRANSFERENCIA_TIPO)
+    values (#{TRANSFERENCIA_ID,jdbcType=DECIMAL}, #{TRANSFERENCIA_USUARIO_ID,jdbcType=DECIMAL}, 
+      #{TRANSFERENCIA_CUENTA_ORIGEN,jdbcType=DECIMAL}, #{TRANSFERENCIA_CUENTA_DESTINO,jdbcType=DECIMAL}, 
+      #{TRANSFERENCIA_MONTO,jdbcType=DECIMAL}, #{TRANSFERENCIA_TIPO,jdbcType=CHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.tecnoratones.mgtest.model.TbTransferencia" >
+    insert into TB_TRANSFERENCIA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="TRANSFERENCIA_ID != null" >
+        TRANSFERENCIA_ID,
+      </if>
+      <if test="TRANSFERENCIA_USUARIO_ID != null" >
+        TRANSFERENCIA_USUARIO_ID,
+      </if>
+      <if test="TRANSFERENCIA_CUENTA_ORIGEN != null" >
+        TRANSFERENCIA_CUENTA_ORIGEN,
+      </if>
+      <if test="TRANSFERENCIA_CUENTA_DESTINO != null" >
+        TRANSFERENCIA_CUENTA_DESTINO,
+      </if>
+      <if test="TRANSFERENCIA_MONTO != null" >
+        TRANSFERENCIA_MONTO,
+      </if>
+      <if test="TRANSFERENCIA_TIPO != null" >
+        TRANSFERENCIA_TIPO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="TRANSFERENCIA_ID != null" >
+        #{TRANSFERENCIA_ID,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_USUARIO_ID != null" >
+        #{TRANSFERENCIA_USUARIO_ID,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_CUENTA_ORIGEN != null" >
+        #{TRANSFERENCIA_CUENTA_ORIGEN,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_CUENTA_DESTINO != null" >
+        #{TRANSFERENCIA_CUENTA_DESTINO,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_MONTO != null" >
+        #{TRANSFERENCIA_MONTO,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_TIPO != null" >
+        #{TRANSFERENCIA_TIPO,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.tecnoratones.mgtest.model.TbTransferencia" >
+    update TB_TRANSFERENCIA
+    <set >
+      <if test="TRANSFERENCIA_USUARIO_ID != null" >
+        TRANSFERENCIA_USUARIO_ID = #{TRANSFERENCIA_USUARIO_ID,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_CUENTA_ORIGEN != null" >
+        TRANSFERENCIA_CUENTA_ORIGEN = #{TRANSFERENCIA_CUENTA_ORIGEN,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_CUENTA_DESTINO != null" >
+        TRANSFERENCIA_CUENTA_DESTINO = #{TRANSFERENCIA_CUENTA_DESTINO,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_MONTO != null" >
+        TRANSFERENCIA_MONTO = #{TRANSFERENCIA_MONTO,jdbcType=DECIMAL},
+      </if>
+      <if test="TRANSFERENCIA_TIPO != null" >
+        TRANSFERENCIA_TIPO = #{TRANSFERENCIA_TIPO,jdbcType=CHAR},
+      </if>
+    </set>
+    where TRANSFERENCIA_ID = #{TRANSFERENCIA_ID,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.tecnoratones.mgtest.model.TbTransferencia" >
+    update TB_TRANSFERENCIA
+    set TRANSFERENCIA_USUARIO_ID = #{TRANSFERENCIA_USUARIO_ID,jdbcType=DECIMAL},
+      TRANSFERENCIA_CUENTA_ORIGEN = #{TRANSFERENCIA_CUENTA_ORIGEN,jdbcType=DECIMAL},
+      TRANSFERENCIA_CUENTA_DESTINO = #{TRANSFERENCIA_CUENTA_DESTINO,jdbcType=DECIMAL},
+      TRANSFERENCIA_MONTO = #{TRANSFERENCIA_MONTO,jdbcType=DECIMAL},
+      TRANSFERENCIA_TIPO = #{TRANSFERENCIA_TIPO,jdbcType=CHAR}
+    where TRANSFERENCIA_ID = #{TRANSFERENCIA_ID,jdbcType=DECIMAL}
+  </update>
+  
+  
+  
+  
+  
+    
+<insert id="transPack"  statementType="CALLABLE">
+{call PACK_TRANSACCION.SP_TRANSFERENCIA(
+#{0,javaType=Integer,jdbcType=INTEGER,mode=IN},
+#{1,javaType=Integer,jdbcType=INTEGER,mode=IN},
+#{2,javaType=Integer,jdbcType=INTEGER,mode=IN},
+#{3,javaType=Integer,jdbcType=INTEGER,mode=IN}
+)}
+</insert>
+  
+  
+  <insert id="extornoPack"  statementType="CALLABLE">
+{call PACK_TRANSACCION.SP_EXTORNO(
+#{0,javaType=Integer,jdbcType=INTEGER,mode=IN},
+#{1,javaType=Integer,jdbcType=INTEGER,mode=IN}
+)}
+</insert>
+  
+  
+  
+  
+  
+  
+  
+</mapper>

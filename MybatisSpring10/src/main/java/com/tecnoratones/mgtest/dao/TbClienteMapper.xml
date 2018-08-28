@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tecnoratones.mgtest.dao.TbClienteMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.tecnoratones.mgtest.model.TbCliente" >
+    <id column="CLIENTE_CUENTA" property="CLIENTE_CUENTA" jdbcType="DECIMAL" />
+    <result column="CLIENTE_NOMBRE" property="CLIENTE_NOMBRE" jdbcType="VARCHAR" />
+    <result column="CLIENTE_APELLIDO" property="CLIENTE_APELLIDO" jdbcType="VARCHAR" />
+    <result column="CLIENTE_USUARIO_ID" property="CLIENTE_USUARIO_ID" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    CLIENTE_CUENTA, CLIENTE_NOMBRE, CLIENTE_APELLIDO, CLIENTE_USUARIO_ID
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TB_CLIENTE
+    where CLIENTE_CUENTA = #{CLIENTE_CUENTA,jdbcType=DECIMAL}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_CLIENTE
+    where CLIENTE_CUENTA = #{CLIENTE_CUENTA,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.tecnoratones.mgtest.model.TbCliente" >
+    insert into TB_CLIENTE (CLIENTE_CUENTA, CLIENTE_NOMBRE, CLIENTE_APELLIDO, 
+      CLIENTE_USUARIO_ID)
+    values (#{CLIENTE_CUENTA,jdbcType=DECIMAL}, #{CLIENTE_NOMBRE,jdbcType=VARCHAR}, #{CLIENTE_APELLIDO,jdbcType=VARCHAR}, 
+      #{CLIENTE_USUARIO_ID,jdbcType=DECIMAL})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.tecnoratones.mgtest.model.TbCliente" >
+    insert into TB_CLIENTE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="CLIENTE_CUENTA != null" >
+        CLIENTE_CUENTA,
+      </if>
+      <if test="CLIENTE_NOMBRE != null" >
+        CLIENTE_NOMBRE,
+      </if>
+      <if test="CLIENTE_APELLIDO != null" >
+        CLIENTE_APELLIDO,
+      </if>
+      <if test="CLIENTE_USUARIO_ID != null" >
+        CLIENTE_USUARIO_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="CLIENTE_CUENTA != null" >
+        #{CLIENTE_CUENTA,jdbcType=DECIMAL},
+      </if>
+      <if test="CLIENTE_NOMBRE != null" >
+        #{CLIENTE_NOMBRE,jdbcType=VARCHAR},
+      </if>
+      <if test="CLIENTE_APELLIDO != null" >
+        #{CLIENTE_APELLIDO,jdbcType=VARCHAR},
+      </if>
+      <if test="CLIENTE_USUARIO_ID != null" >
+        #{CLIENTE_USUARIO_ID,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.tecnoratones.mgtest.model.TbCliente" >
+    update TB_CLIENTE
+    <set >
+      <if test="CLIENTE_NOMBRE != null" >
+        CLIENTE_NOMBRE = #{CLIENTE_NOMBRE,jdbcType=VARCHAR},
+      </if>
+      <if test="CLIENTE_APELLIDO != null" >
+        CLIENTE_APELLIDO = #{CLIENTE_APELLIDO,jdbcType=VARCHAR},
+      </if>
+      <if test="CLIENTE_USUARIO_ID != null" >
+        CLIENTE_USUARIO_ID = #{CLIENTE_USUARIO_ID,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CLIENTE_CUENTA = #{CLIENTE_CUENTA,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.tecnoratones.mgtest.model.TbCliente" >
+    update TB_CLIENTE
+    set CLIENTE_NOMBRE = #{CLIENTE_NOMBRE,jdbcType=VARCHAR},
+      CLIENTE_APELLIDO = #{CLIENTE_APELLIDO,jdbcType=VARCHAR},
+      CLIENTE_USUARIO_ID = #{CLIENTE_USUARIO_ID,jdbcType=DECIMAL}
+    where CLIENTE_CUENTA = #{CLIENTE_CUENTA,jdbcType=DECIMAL}
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<insert id="insertPack"  statementType="CALLABLE">
+{call PACK_TB_CLIENTE.SP_CREATE(
+#{0,javaType=String,jdbcType=CHAR,mode=IN},
+#{1,javaType=String,jdbcType=CHAR,mode=IN},
+#{2,javaType=Integer,jdbcType=INTEGER,mode=IN}
+)}
+</insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tecnoratones.mgtest.dao.TbAuditoriaMapper" >
+  <resultMap id="BaseResultMap" type="com.tecnoratones.mgtest.model.TbAuditoria" >
+    <id column="AUDITORIA_ID" property="AUDITORIA_ID" jdbcType="DECIMAL" />
+    <result column="AUDITORIA_FECHA" property="AUDITORIA_FECHA" jdbcType="TIMESTAMP" />
+    <result column="AUDITORIA_SCHEMA" property="AUDITORIA_SCHEMA" jdbcType="VARCHAR" />
+    <result column="AUDITORIA_TRANSFERENCIA_ID" property="AUDITORIA_TRANSFERENCIA_ID" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AUDITORIA_ID, AUDITORIA_FECHA, AUDITORIA_SCHEMA, AUDITORIA_TRANSFERENCIA_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TB_AUDITORIA
+    where AUDITORIA_ID = #{AUDITORIA_ID,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_AUDITORIA
+    where AUDITORIA_ID = #{AUDITORIA_ID,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.tecnoratones.mgtest.model.TbAuditoria" >
+    insert into TB_AUDITORIA (AUDITORIA_ID, AUDITORIA_FECHA, 
+      AUDITORIA_SCHEMA, AUDITORIA_TRANSFERENCIA_ID
+      )
+    values (#{AUDITORIA_ID,jdbcType=DECIMAL}, #{AUDITORIA_FECHA,jdbcType=TIMESTAMP}, 
+      #{AUDITORIA_SCHEMA,jdbcType=VARCHAR}, #{AUDITORIA_TRANSFERENCIA_ID,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tecnoratones.mgtest.model.TbAuditoria" >
+    insert into TB_AUDITORIA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="AUDITORIA_ID != null" >
+        AUDITORIA_ID,
+      </if>
+      <if test="AUDITORIA_FECHA != null" >
+        AUDITORIA_FECHA,
+      </if>
+      <if test="AUDITORIA_SCHEMA != null" >
+        AUDITORIA_SCHEMA,
+      </if>
+      <if test="AUDITORIA_TRANSFERENCIA_ID != null" >
+        AUDITORIA_TRANSFERENCIA_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="AUDITORIA_ID != null" >
+        #{AUDITORIA_ID,jdbcType=DECIMAL},
+      </if>
+      <if test="AUDITORIA_FECHA != null" >
+        #{AUDITORIA_FECHA,jdbcType=TIMESTAMP},
+      </if>
+      <if test="AUDITORIA_SCHEMA != null" >
+        #{AUDITORIA_SCHEMA,jdbcType=VARCHAR},
+      </if>
+      <if test="AUDITORIA_TRANSFERENCIA_ID != null" >
+        #{AUDITORIA_TRANSFERENCIA_ID,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tecnoratones.mgtest.model.TbAuditoria" >
+    update TB_AUDITORIA
+    <set >
+      <if test="AUDITORIA_FECHA != null" >
+        AUDITORIA_FECHA = #{AUDITORIA_FECHA,jdbcType=TIMESTAMP},
+      </if>
+      <if test="AUDITORIA_SCHEMA != null" >
+        AUDITORIA_SCHEMA = #{AUDITORIA_SCHEMA,jdbcType=VARCHAR},
+      </if>
+      <if test="AUDITORIA_TRANSFERENCIA_ID != null" >
+        AUDITORIA_TRANSFERENCIA_ID = #{AUDITORIA_TRANSFERENCIA_ID,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where AUDITORIA_ID = #{AUDITORIA_ID,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tecnoratones.mgtest.model.TbAuditoria" >
+    update TB_AUDITORIA
+    set AUDITORIA_FECHA = #{AUDITORIA_FECHA,jdbcType=TIMESTAMP},
+      AUDITORIA_SCHEMA = #{AUDITORIA_SCHEMA,jdbcType=VARCHAR},
+      AUDITORIA_TRANSFERENCIA_ID = #{AUDITORIA_TRANSFERENCIA_ID,jdbcType=DECIMAL}
+    where AUDITORIA_ID = #{AUDITORIA_ID,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <select id="audiView" resultType="hashmap">
+  SELECT * FROM VIEW_TRANSACCIONES1 ORDER BY TRANSACCION DESC
+  </select>
+  
+  
+  
+  <select id="listaAudi" resultMap="BaseResultMap">
+  SELECT * FROM TB_AUDITORIA order by auditoria_id desc
+  </select>
+  
+  
+  
+  
+  
+  
+  
+</mapper>

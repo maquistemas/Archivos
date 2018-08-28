@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tecnoratones.mgtest.dao.TbUsuarioMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.tecnoratones.mgtest.model.TbUsuario" >
+    <id column="USUARIO_ID" property="USUARIO_ID" jdbcType="DECIMAL" />
+    <result column="USUARIO_NAME" property="USUARIO_NAME" jdbcType="VARCHAR" />
+    <result column="USUARIO_PASSWORD" property="USUARIO_PASSWORD" jdbcType="DECIMAL" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List" >
+    USUARIO_ID, USUARIO_NAME, USUARIO_PASSWORD
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TB_USUARIO
+    where USUARIO_ID = #{USUARIO_ID,jdbcType=DECIMAL}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_USUARIO
+    where USUARIO_ID = #{USUARIO_ID,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.tecnoratones.mgtest.model.TbUsuario" >
+    insert into TB_USUARIO (USUARIO_ID, USUARIO_NAME, USUARIO_PASSWORD
+      )
+    values (#{USUARIO_ID,jdbcType=DECIMAL}, #{USUARIO_NAME,jdbcType=VARCHAR}, #{USUARIO_PASSWORD,jdbcType=DECIMAL}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.tecnoratones.mgtest.model.TbUsuario" >
+    insert into TB_USUARIO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="USUARIO_ID != null" >
+        USUARIO_ID,
+      </if>
+      <if test="USUARIO_NAME != null" >
+        USUARIO_NAME,
+      </if>
+      <if test="USUARIO_PASSWORD != null" >
+        USUARIO_PASSWORD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="USUARIO_ID != null" >
+        #{USUARIO_ID,jdbcType=DECIMAL},
+      </if>
+      <if test="USUARIO_NAME != null" >
+        #{USUARIO_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USUARIO_PASSWORD != null" >
+        #{USUARIO_PASSWORD,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.tecnoratones.mgtest.model.TbUsuario" >
+    update TB_USUARIO
+    <set >
+      <if test="USUARIO_NAME != null" >
+        USUARIO_NAME = #{USUARIO_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USUARIO_PASSWORD != null" >
+        USUARIO_PASSWORD = #{USUARIO_PASSWORD,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where USUARIO_ID = #{USUARIO_ID,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.tecnoratones.mgtest.model.TbUsuario" >
+    update TB_USUARIO
+    set USUARIO_NAME = #{USUARIO_NAME,jdbcType=VARCHAR},
+      USUARIO_PASSWORD = #{USUARIO_PASSWORD,jdbcType=DECIMAL}
+    where USUARIO_ID = #{USUARIO_ID,jdbcType=DECIMAL}
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="logu" resultMap="BaseResultMap" >
+    select USUARIO_ID, USUARIO_NAME, USUARIO_PASSWORD
+    from TB_USUARIO
+    where USUARIO_NAME = #{0,jdbcType=VARCHAR} and USUARIO_PASSWORD = #{1,jdbcType=DECIMAL}
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>

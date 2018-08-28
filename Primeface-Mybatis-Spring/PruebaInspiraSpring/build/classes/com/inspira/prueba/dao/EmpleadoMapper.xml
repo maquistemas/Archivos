@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspira.prueba.dao.EmpleadoMapper">
+	<select id="getEmpleadoDet" resultType="com.inspira.prueba.entity.Empleado">
+		select C.dni,C.nombre,C.apellido from EMPLEADO C order by C.dni desc
+	</select>
+
+	<insert id="insertaEmpl" keyProperty="id"
+		parameterType="com.inspira.prueba.entity.Empleado">
+		insert
+		into EMPLEADO values (#{DNI}, #{Nombre},#{Apellido})
+	</insert>
+	<delete id="delEmpleado" parameterType="com.inspira.prueba.entity.Empleado">
+		delete from EMPLEADO
+		where DNI = #{DNI}
+	</delete>
+	<update id="upEmpleado" parameterType="com.inspira.prueba.entity.Empleado">
+		update EMPLEADO set
+		NOMBRE = #{Nombre},
+		APELLIDO =	#{Apellido}
+		where DNI = #{DNI}
+	</update>
+</mapper>
