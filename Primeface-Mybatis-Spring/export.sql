@@ -1,3 +1,6 @@
+http://96.3.1.147/dds_java/dds_java_apps/dds_java_webapps/java-webapp-template.git
+
+
 create or replace PACKAGE BODY        "PK_XCRI_ALTAS_VAL_ASIG_CODSBS" IS
 -- --------------------------------------------------------------------------------------------------------------------
 -- Author : FVITES - Created: 01/07/2004
